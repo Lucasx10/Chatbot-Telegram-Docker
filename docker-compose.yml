@@ -1,0 +1,39 @@
+version: "3"
+services:
+  chat-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./sessions:/app/sessions
+    networks:
+      - bot-network
+
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=projsd
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - bot-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=1234
+    depends_on:
+      - mysql
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
