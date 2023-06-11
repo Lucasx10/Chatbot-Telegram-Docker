@@ -4,3 +4,4 @@ rsa==4.9
 Telethon==1.26.1
 wincertstore==0.2
 mysqlclient==2.1.1
+openai==0.27.8 
