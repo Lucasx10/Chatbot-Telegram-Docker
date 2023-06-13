@@ -18,7 +18,7 @@ services:
       - MYSQL_DATABASE=projsd
     volumes:
       - ./mysql_data:/var/lib/mysql
-      - ./dump:/docker-entrypoint-initdb.d
+      - ./dump:/docker-entrypoint-initdb.d      #Inicializa com criação de tabela e preenchimento de dados teste 
     networks:
       - bot-network
 
